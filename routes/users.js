@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
         req.body.email, 
         req.body.password
     );
-    const {error} = user.validate();
+    const {error} = user.validateUser();
 
     if(error)
         return res.status(400).send(error.details[0].message);
@@ -25,6 +25,9 @@ router.post('/', async (req, res) => {
 
     const token = user.generateAuthToken();
     res.header('x-auth-token', token).send(user);
+
+
+    console.log(User.users)
 })
 
 module.exports = router; 
